@@ -1,50 +1,166 @@
 <html>
 <head>
-
 <style>
 
-  #overlay {
-  position: absolute;
-  display: none;
-  left: 10%;
-  top: 10%;
-  width: 80%;
-  height: 80%;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 2;
-  cursor: pointer;
-}     
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}       
-</style>
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
 
+@keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+
+.fade-in {
+  animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+div.buttonBlock {text-align: center}
+div.buttonBlock button {
+        justify-content: center;
+        background-color: #722F37;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        margin: 4px 2px;
+        cursor: pointer;
+        vertical-align: middle;}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  font-size:50px;
+  text-shadow:-2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;  
+  }
+h2 {
+  text-align:center;
+  color: #fff;
+  font-size:25px;
+  text-shadow:-2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;  
+}
+p {
+  text-align:center;
+  color: #fff;
+  font-size:20px;
+  text-shadow:-1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+body {
+background-image: url(https://patworld.me/wp-content/uploads/2026/03/Polyamory_Pride_Flag.svg_.png);
+ background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+}
+</style>
 </head>
 
 
 <body>
-<div id="overlay" onclick="off()"></div>
-
-<div class="center">
+  <h1>The Gay Quiz</h1> <br />
   <p>Have you ever wondered if you were gay before? With just a few easy questions, this quiz can solve all of your wants and desires.</p>
-</div>
 
-<p>Do you already know if you're gay? Well then this quiz will be mighty reassuring to you.</p>
+  <p>Do you already know if you're gay? Well then this quiz will be mighty reassuring to you.</p>
 
-<p>Are you ready to begin</p>
+  <p>Are you ready to begin?</p>
 
-<div class="center">
-<button onclick="quizstart()">Explore my Gayness!</button></div>
+  <div id="start" class="buttonBlock">
+  <button onclick="quizstart()">Explore my Gayness!</button></div>
 
+  <br /><br />
+  <div id="Q" style="display:none" class="fade-in">
+    <h1 id="Q1"> Question 1: Are you gay?</h1>
+    <h1 id="Q2" style="display:none"> Question <span id="display">1</span>: Are you gay now?</h1>
+    <br /><br />
+    <div class="buttonBlock">
+        <button id="Yes">Yes</button>
+        <button id="No">No</button>
+        <button id="Continue">I have not yet decided</button>
+    </div>
+  </div>
+
+  <div id="Gay" style="display:none" class="fade-in"> 
+    <h2>The results are in <br /> You are decidedly </h2><br />
+    <h1
+      style="background-image:url(https://patworld.me/wp-content/uploads/2026/03/images.png); 
+      background-size:contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+      "> <br />
+    Gay <br /><span>&shy;</span><br /><span>&shy;</span></h1>
+  </div>
+
+  <div id="Not Gay" style="display:none" class="fade-in"> 
+    <h2>The results are in <br /> You are decidedly </h2><br />
+    <h1 
+      style="background-image:url(https://patworld.me/wp-content/uploads/2026/03/Untitled.png); 
+      background-size:contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+      color:#1c1e91;
+      "> <br />
+    Not Gay <br /><span>&shy;</span><br /><span>&shy;</span></h1>
+  </div>
 </body>
 <script>
+  let count = 1;
+  let disp = document.getElementById("display");
+
 function quizstart() {
- document.getElementById("overlay").style.display = "flex";
+   document.getElementById("Q").style.display="block"
+   document.getElementById("start").style.display="none"
 }
-function off() {
-  document.getElementById("overlay").style.display = "none";
+Yes.onclick = function() {
+   const q = document.getElementById("Q");
+   const gay = document.getElementById("Gay");
+    q.classList.remove("fade-in");
+    q.classList.add("fade-out");
+   setTimeout(function () {
+    q.remove();
+    gay.style.display="block"
+  }, 600);
 }
+
+No.onclick = function() {
+   const q = document.getElementById("Q");
+   const notgay = document.getElementById("Not Gay");
+    q.classList.remove("fade-in");
+    q.classList.add("fade-out");
+   setTimeout(function () {
+    q.remove();
+    notgay.style.display="block"
+  }, 600);
+}
+
+Continue.onclick = function () {
+  const q1 = document.getElementById("Q1");
+  const q2 = document.getElementById("Q2");
+  const q = document.getElementById("Q");
+  q.classList.remove("fade-in");
+  q.classList.add("fade-out");
+  setTimeout(function () {
+    count++;
+    disp.innerHTML = count;
+    q2.style.display = "block";
+    q.classList.add("fade-in");
+    q1.remove();
+  }, 600);
+};
 </script>
 </html>
