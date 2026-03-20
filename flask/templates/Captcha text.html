@@ -1,55 +1,65 @@
+<!DOCTYPE html>
 <html>
+<head>
+  <title>Captcha Test</title>
+</head>
 <body>
-<!---top text-->
-<h1> Verification is needed before proceeding. </h1>
+  <!-- Top text -->
+  <h1>Verification is needed before proceeding.</h1>
 
+  <!-- Random text Generator -->
+  <p id="output"></p>
 
-<!--Random text Generator-->
-<body>
+  <p>Please enter the characters above</p>
+  <input type="text" id="answer" name="answer">
+  <button id="Submittext">Submit</button>
 
-<p id="output"></p>
+  <p id="wrong"></p>
 
-<script>
-function randomString(length) {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  let result = "";
-  
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
-}
-document.getElementById("output").innerHTML = randomString(5);
-</script>
+  <script>
+    var length = 5;
 
+    function randomString(length) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    document.getElementById("output").innerHTML = randomString(length);
+
+    // Submit button handler
+    Submittext.onclick = function() {
+      var answer = document.getElementById("answer").value;
+
+      if (answer == "") {
+        document.getElementById("wrong").innerHTML = "Please complete the challenge";
+      } else {
+        document.getElementById("wrong").innerHTML = "Please try again";
+
+        if (Math.floor(Math.random() * 10) < 5) {
+          length++;
+        }
+
+        if (Math.floor(Math.random() * 100) < 50) {
+          document.getElementById("wrong").innerHTML = "You Fail";
+
+          // --- NEW: send message to Python backend ---
+          fetch("http://127.0.0.1:5000/fail", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: "User failed captcha" })
+          })
+          .then(res => res.json())
+          .then(data => console.log(data));
+          window.location.href = "captcha image.html";
+        } else {
+          document.getElementById("output").innerHTML = randomString(length);
+        }
+      }
+    }
+  </script>
 </body>
-
-
-<p>Please enter the characters above</p>
-<input type="text" id="answer" name="answer">
-<button id="Submittext">Submit</button>
-
-<p id="wrong"></p>
-
-</body>
-<script>
-var length =5
-Submittext.onclick = function(){
-var answer = document.getElementById("answer").value;
-if (answer ==""){
-document.getElementById("wrong").innerHTML = "Please complete the challenge"
-}else{
-document.getElementById("wrong").innerHTML = "Please try again"
-if (Math.floor(Math.random()*10) < 5){
-   length++
-}
-if(Math.floor(Math.random()*100) < 5){
-document.getElementById("wrong").innerHTML = "You Fail"
-}else{
-document.getElementById("output").innerHTML = randomString(length);
-}}}
-
-
-
-</script>
 </html>
