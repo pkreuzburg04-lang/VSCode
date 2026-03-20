@@ -1,21 +1,85 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Captcha Test</title>
-</head>
-<body>
-  <!-- Top text -->
-  <h1>Verification is needed before proceeding.</h1>
+  
+<body>  <!-- Text Captcha -->
 
+  <style>
+    h1 {
+      text-align: center;
+      font-size:25px;
+    }
+    p {
+      text-align: center;
+      font-size:16px;
+    }
+    div.center {text-align: center}
+    div.center button {
+        justify-content: center;
+        text-align: center;}
+
+    .prevent-select {
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none; /* Standard syntax */
+    }
+
+
+    /* Main text */
+    .captcha-text {
+      font-size: 48px;
+      font-weight: bold;
+      color: rgb(0, 0, 0);
+      position: relative;
+      display: inline-block;
+      filter: url(#noiseFilter);
+    }
+
+    /* random lines overlay */
+    .captcha-text::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent .001px,
+        rgb(0, 0, 0) 15px
+      );
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
+    /* slight jitter */
+    @keyframes jitter {
+      0% { transform: translate(0,0); }
+      25% { transform: translate(-1px,1px); }
+      50% { transform: translate(1px,-1px); }
+      75% { transform: translate(-1px,0); }
+      100% { transform: translate(0,0); }
+    }
+
+    .captcha-text {
+      animation: jitter 0.15s infinite;
+    }
+  </style>
+
+  <div class="center">
+    <!-- Top text -->
+    <h1>Verification is needed before proceeding.</h1>
+
+    
+    <p id="output" class="prevent-select captcha-text"></p>
+
+    <p id="text instructions">Please enter the characters above</p>
+
+
+    <input type="text" id="answer" name="answer">
+    
+    <button id="Submittext">Submit</button>
+    
+    <p id="wrong"></p>
+  </div>
   <!-- Random text Generator -->
-  <p id="output"></p>
-
-  <p>Please enter the characters above</p>
-  <input type="text" id="answer" name="answer">
-  <button id="Submittext">Submit</button>
-
-  <p id="wrong"></p>
-
   <script>
     var length = 5;
 
@@ -30,7 +94,6 @@
 
     document.getElementById("output").innerHTML = randomString(length);
 
-    // Submit button handler
     Submittext.onclick = function() {
       var answer = document.getElementById("answer").value;
 
@@ -43,18 +106,13 @@
           length++;
         }
 
-        if (Math.floor(Math.random() * 100) < 50) {
+        if (Math.floor(Math.random() * 100) < 10) {
           document.getElementById("wrong").innerHTML = "You Fail";
+          document.getElementById("answer").remove();
+          document.getElementById("Submittext").remove();
+          document.getElementById("text instructions").remove()
+          document.getElementById("output").remove()
 
-          // --- NEW: send message to Python backend ---
-          fetch("http://127.0.0.1:5000/fail", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: "User failed captcha" })
-          })
-          .then(res => res.json())
-          .then(data => console.log(data));
-          window.location.href = "captcha image.html";
         } else {
           document.getElementById("output").innerHTML = randomString(length);
         }
@@ -62,4 +120,6 @@
     }
   </script>
 </body>
+
+
 </html>
