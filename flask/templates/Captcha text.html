@@ -1,0 +1,55 @@
+<html>
+<body>
+<!---top text-->
+<h1> Verification is needed before proceeding. </h1>
+
+
+<!--Random text Generator-->
+<body>
+
+<p id="output"></p>
+
+<script>
+function randomString(length) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  let result = "";
+  
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+document.getElementById("output").innerHTML = randomString(5);
+</script>
+
+</body>
+
+
+<p>Please enter the characters above</p>
+<input type="text" id="answer" name="answer">
+<button id="Submittext">Submit</button>
+
+<p id="wrong"></p>
+
+</body>
+<script>
+var length =5
+Submittext.onclick = function(){
+var answer = document.getElementById("answer").value;
+if (answer ==""){
+document.getElementById("wrong").innerHTML = "Please complete the challenge"
+}else{
+document.getElementById("wrong").innerHTML = "Please try again"
+if (Math.floor(Math.random()*10) < 5){
+   length++
+}
+if(Math.floor(Math.random()*100) < 5){
+document.getElementById("wrong").innerHTML = "You Fail"
+}else{
+document.getElementById("output").innerHTML = randomString(length);
+}}}
+
+
+
+</script>
+</html>

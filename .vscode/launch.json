@@ -5,13 +5,14 @@
     "version": "0.2.0",
     "configurations": [
 
+
         
 
         {
             "type": "waterfox",
             "request": "launch",
             "name": "Open gay.html",
-            "file": "c:\\Users\\pkreu\\Documents\\VSCode\\VSCode\\gay.html"
+            "file": "C:\\Users\\pkreu\\Documents\\VSCode\\VSCode\\flask\\templates\\Captcha text.html"
         }
     ]
 }
