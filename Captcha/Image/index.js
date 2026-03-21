@@ -42,7 +42,7 @@ document.getElementById("submit").addEventListener("click",()=>{
 })
 
 // fill up the solve-image-container
-const imageCount = 15
+const imageCount = 23
 const solveImageContainer = document.getElementById("solve-image-main-container")
 for (let i=0; i<3; i++) {
     for (let j=0; j<3; j++) {
@@ -75,6 +75,9 @@ const refreshImage = (image) => {
 // show try again when verify is click
 document.getElementById("verify").addEventListener("click",()=> {
     document.getElementById("solve-image-error-msg").style.display = "block"
+    if (Math.floor(Math.random() * 10) < 3){
+        window.location.href="../text.html"
+    }
 })
 
 // refresh everything when refresh is clicked
