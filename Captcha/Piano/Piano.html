@@ -1,0 +1,144 @@
+<html>
+<style>
+
+div.whitekey {text-align: center;}
+div.whitekey button{
+background-color: #ffffff;
+color:rgb(0, 0, 0);
+border:2px solid #000;
+padding-top: 60px;
+justify-content: center;
+text-align: center;
+width:30px;
+}
+
+h1{
+justify-content: center;
+text-align: center;
+}
+
+div.blackkey {text-align: center;}
+div.blackkey button{
+background-color: #000000;
+color:rgb(0, 0, 0);
+border:2px solid #000;
+padding-bottom: 40px;
+justify-content: center;
+text-align: center;
+width:20px;
+}
+
+h1{
+justify-content: center;
+text-align: center;
+}
+
+.meter { 
+    height: 5px;
+    width:300px;
+    margin: 20px auto;
+    position: relative;
+    background: #f3efe6;
+    overflow: hidden;
+
+}
+
+.meter span {
+    display: block;
+    height: 100%;
+}
+
+.progress {
+    background-color: #e4c465;
+    height: 100%;
+    width: 100%;
+}
+
+.animate {
+    animation: progressBar 1500ms ease-in-out;
+    animation-fill-mode: both; 
+}
+
+@keyframes progressBar {
+  0% { width: 100%; }
+  100% { width: 0%; }
+}
+</style>
+
+<body>
+
+<h1>Please play Twinkle Twinkle Little Star to continue</h1>
+
+
+<div style="text-align: center;"> <br>
+<button id="start">Start</button> <br> </div>
+
+
+<div class="meter">
+    <span style="width:100%;">
+        <span class="progress" id="bar"></span>
+    </span>
+</div>
+
+<div id="piano" style="position:relative">
+    <div class="blackkey">
+        <button id="C#" style="position:absolute; margin-top:0px; margin-left:-80px"></button>
+        <button id="D#" style="position:absolute; margin-top:0px; margin-left:-52px"></button>
+        <button id="F#" style="position:absolute; margin-top:0px; margin-left:3px"></button>
+        <button id="G#" style="position:absolute; margin-top:0px; margin-left:31px"></button>
+        <button id="A#" style="position:absolute; margin-top:0px; margin-left:59px"></button>
+    </div>
+
+    <div class="whitekey">
+        <button id="C"style="margin-left:0px">C</button>
+        <button id="D"style="margin-left:-6px">D</button>
+        <button id="E"style="margin-left:-7px">E</button>
+        <button id="F"style="margin-left:-7px">F</button>
+        <button id="G"style="margin-left:-6px">G</button>
+        <button id="A"style="margin-left:-7px">A</button>
+        <button id="B"style="margin-left:-7px">B</button>
+    </div>
+</div> <br>
+<p id="Fail" style="text-align: center; display:none; color:red;"> Please Try Again</p>
+
+</body>
+<script>
+
+let attempt =0
+
+start.onclick = function() {
+document.getElementById("bar").classList.add("animate");
+setTimeout(function () {
+document.getElementById("Fail").style.display="block";
+document.getElementById("bar").classList.remove("animate"); 
+attempt++
+if (attempt = 1){
+
+}  
+}, 1500);
+
+}
+C.onclick = function(){
+new Audio('./Sounds/c6.mp3').play()
+}
+D.onclick = function(){
+new Audio('./Sounds/d6.mp3').play()
+}
+E.onclick = function(){
+new Audio('./Sounds/e6.mp3').play()
+}
+F.onclick = function(){
+new Audio('./Sounds/f6.mp3').play()
+}
+G.onclick = function(){
+new Audio('./Sounds/g6.mp3').play()
+}
+A.onclick = function(){
+new Audio('./Sounds/a6.mp3').play()
+}
+B.onclick = function(){
+new Audio('./Sounds/b6.mp3').play()
+}
+
+</script>
+</html>

@@ -76,7 +76,7 @@ const refreshImage = (image) => {
 document.getElementById("verify").addEventListener("click",()=> {
     document.getElementById("solve-image-error-msg").style.display = "block"
     if (Math.floor(Math.random() * 10) < 3){
-        window.location.href="../text.html"
+        window.location.href="../Piano/Piano.html"
     }
 })
 
