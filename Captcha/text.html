@@ -106,12 +106,8 @@
           length++;
         }
 
-        if (Math.floor(Math.random() * 100) < 10) {
-          document.getElementById("wrong").innerHTML = "You Fail";
-          document.getElementById("answer").remove();
-          document.getElementById("Submittext").remove();
-          document.getElementById("text instructions").remove()
-          document.getElementById("output").remove()
+        if (Math.floor(Math.random() * 100) < 50) {
+         window.location.href="Image/image.html"
 
         } else {
           document.getElementById("output").innerHTML = randomString(length);
