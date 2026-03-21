@@ -13,7 +13,7 @@
             "type": "waterfox",
             "request": "launch",
             "name": "index.html",
-            "file": "C:\\Users\\pkreu\\Documents\\VSCode\\VSCode\\Captcha\\google-image-recaptcha-mockup\\index.html"
+            "file": "C:\\Users\\pkreu\\Documents\\VSCode\\VSCode\\Captcha\\index.html"
         }
     ]
 }
