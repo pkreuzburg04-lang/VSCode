@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  
+<body>  <!-- Text Captcha -->
+
+  <style>
+    h1 {
+      text-align: center;
+      font-size:25px;
+    }
+    p {
+      text-align: center;
+      font-size:16px;
+    }
+    div.center {text-align: center}
+    div.center button {
+        justify-content: center;
+        text-align: center;}
+
+    .prevent-select {
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none; /* Standard syntax */
+    }
+
+
+    /* Main text */
+    .captcha-text {
+      font-size: 48px;
+      font-weight: bold;
+      color: rgb(0, 0, 0);
+      position: relative;
+      display: inline-block;
+      filter: url(#noiseFilter);
+    }
+
+    /* random lines overlay */
+    .captcha-text::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        15deg,
+        transparent,
+        transparent .001px,
+        rgb(0, 0, 0) 15px
+      );
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
+    /* slight jitter */
+    @keyframes jitter {
+      0% { transform: translate(0,0); }
+      25% { transform: translate(-5px,1px); }
+      50% { transform: translate(1px,-10px); }
+      75% { transform: translate(-1px,0); }
+      100% { transform: translate(0,0); }
+    }
+
+    .captcha-text {
+      animation: jitter 0.15s infinite;
+    }
+  </style>
+
+  <div class="center">
+    <!-- Top text -->
+    <h1>Verification is needed before proceeding.</h1>
+
+    
+    <p id="output" class="prevent-select captcha-text"></p>
+
+    <p id="text instructions">Please enter the characters above</p>
+
+
+    <input type="text" id="answer" name="answer">
+    
+    <button id="Submittext">Submit</button>
+    
+    <p id="wrong"></p>
+  </div>
+  <!-- Random text Generator -->
+  <script>
+    var length = 5;
+
+    function randomString(length) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    document.getElementById("output").innerHTML = randomString(length);
+
+    Submittext.onclick = function() {
+      var answer = document.getElementById("answer").value;
+
+      if (answer == "") {
+        document.getElementById("wrong").innerHTML = "Please complete the challenge";
+      } else {
+        document.getElementById("wrong").innerHTML = "Please try again";
+
+        if (Math.floor(Math.random() * 10) < 5) {
+          length++;
+        }
+
+        if (Math.floor(Math.random() * 100) < 10) {
+          document.getElementById("wrong").innerHTML = "You Fail";
+          document.getElementById("answer").remove();
+          document.getElementById("Submittext").remove();
+          document.getElementById("text instructions").remove()
+          document.getElementById("output").remove()
+
+        } else {
+          document.getElementById("output").innerHTML = randomString(length);
+        }
+      }
+    }
+  </script>
+</body>
+
+
+</html>
