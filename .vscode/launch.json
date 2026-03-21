@@ -6,13 +6,14 @@
     "configurations": [
 
 
+
         
 
         {
             "type": "waterfox",
             "request": "launch",
-            "name": "Open gay.html",
-            "file": "C:\\Users\\pkreu\\Documents\\VSCode\\VSCode\\flask\\templates\\Captcha text.html"
+            "name": "index.html",
+            "file": "C:\\Users\\pkreu\\Documents\\VSCode\\VSCode\\Captcha\\google-image-recaptcha-mockup\\index.html"
         }
     ]
 }
