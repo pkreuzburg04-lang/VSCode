@@ -3,13 +3,13 @@
 
 div.whitekey {text-align: center;}
 div.whitekey button{
-background-color: #ffffff;
-color:rgb(0, 0, 0);
-border:2px solid #000;
-padding-top: 60px;
-justify-content: center;
-text-align: center;
-width:30px;
+    background-color: #ffffff;
+    color:rgb(0, 0, 0);
+    border:2px solid #000;
+    padding-top: 60px;
+    justify-content: center;
+    text-align: center;
+    width:30px;
 }
 
 h1{
@@ -19,18 +19,18 @@ text-align: center;
 
 div.blackkey {text-align: center;}
 div.blackkey button{
-background-color: #000000;
-color:rgb(0, 0, 0);
-border:2px solid #000;
-padding-bottom: 40px;
-justify-content: center;
-text-align: center;
-width:20px;
+    background-color: #000000;
+    color:rgb(0, 0, 0);
+    border:2px solid #000;
+    padding-bottom: 40px;
+    justify-content: center;
+    text-align: center;
+    width:20px;
 }
 
 h1{
-justify-content: center;
-text-align: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .meter { 
@@ -67,7 +67,7 @@ text-align: center;
 
 <body>
 
-<h1>Please play Twinkle Twinkle Little Star to continue</h1>
+<h1 id="instructions">Please play Twinkle Twinkle Little Star to continue</h1>
 
 
 <div style="text-align: center;"> <br>
@@ -107,37 +107,77 @@ text-align: center;
 let attempt =0
 
 start.onclick = function() {
-document.getElementById("bar").classList.add("animate");
-setTimeout(function () {
-document.getElementById("Fail").style.display="block";
-document.getElementById("bar").classList.remove("animate"); 
-attempt++
-if (attempt = 1){
-
-}  
-}, 1500);
-
+    document.getElementById("bar").classList.add("animate");
+        setTimeout(function () {
+            document.getElementById("Fail").style.display="block";
+            document.getElementById("bar").classList.remove("animate"); 
+            attempt++
+            if (attempt == 2){
+                document.getElementById("instructions").textContent="How about playing Row Row Row Your Boat instead"
+            } 
+            else if(attempt==4){
+                document.getElementById("instructions").textContent="Okay, just play something that makes you seem human"    
+            }
+            else if (attempt==5){
+                window.location.href="../Alignment/alignment.html"
+            }
+            }, 1500);
 }
+
 C.onclick = function(){
-new Audio('./Sounds/c6.mp3').play()
+    new Audio('./Sounds/c6.mp3').play()
+    document.getElementById("C").style.backgroundColor="#999";
+    setTimeout(function (){
+        document.getElementById("C").style.backgroundColor="#fff";
+    },350)
 }
+
 D.onclick = function(){
-new Audio('./Sounds/d6.mp3').play()
+    new Audio('./Sounds/d6.mp3').play()
+    document.getElementById("D").style.backgroundColor="#999";
+    setTimeout(function (){
+        document.getElementById("D").style.backgroundColor="#fff";
+    },350)
 }
+
 E.onclick = function(){
-new Audio('./Sounds/e6.mp3').play()
+    new Audio('./Sounds/e6.mp3').play()
+    document.getElementById("E").style.backgroundColor="#999";
+    setTimeout(function (){
+        document.getElementById("E").style.backgroundColor="#fff";
+    },350)
 }
+
 F.onclick = function(){
-new Audio('./Sounds/f6.mp3').play()
+    new Audio('./Sounds/f6.mp3').play()
+    document.getElementById("F").style.backgroundColor="#999";
+    setTimeout(function (){
+        document.getElementById("F").style.backgroundColor="#fff";
+    },350)
 }
+
 G.onclick = function(){
-new Audio('./Sounds/g6.mp3').play()
+    new Audio('./Sounds/g6.mp3').play()
+    document.getElementById("G").style.backgroundColor="#999";
+    setTimeout(function (){
+        document.getElementById("G").style.backgroundColor="#fff";
+    },350)
 }
+
 A.onclick = function(){
-new Audio('./Sounds/a6.mp3').play()
+    new Audio('./Sounds/a6.mp3').play()
+    document.getElementById("A").style.backgroundColor="#999";
+    setTimeout(function (){
+        document.getElementById("A").style.backgroundColor="#fff";
+    },350)
 }
+
 B.onclick = function(){
-new Audio('./Sounds/b6.mp3').play()
+    new Audio('./Sounds/b6.mp3').play()
+    document.getElementById("B").style.backgroundColor="#999";
+    setTimeout(function (){
+        document.getElementById("B").style.backgroundColor="#fff";
+    },350)
 }
 
 </script>

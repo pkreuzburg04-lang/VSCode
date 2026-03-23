@@ -1,0 +1,183 @@
+<html>
+<style>
+
+h1 {
+    justify-content: center;
+    text-align: center;
+}
+
+.crosshair{
+   margin:0 auto;
+    width:400px;
+    justify-content: center;
+    align-items: center;  
+}
+
+.outline{
+    border:2px solid #000;
+    height: 400px;
+   margin:0 auto;
+    width:400px;
+    justify-content: center;
+    align-items: center;  
+}
+
+.horizontal{
+    border:1px solid #8585856b;
+    height: 0px;
+   margin:0 auto;
+    width:400px;
+    justify-content: center;
+    align-items: center;   
+}
+
+.vertical{
+    border:1px solid #8585856b;
+    height: 400px;
+   margin:0 auto;
+    width:0px;
+    justify-content: center;
+    align-items: center;   
+}
+
+.movement{
+   margin:0 auto;
+    width:40px;
+    justify-content: center;
+    align-items: center;   
+}
+
+.key{
+    border:2px solid #000000;
+    background-color:#999999;
+    font-size:20px;
+    height:40px;
+
+   margin:0 auto;
+    width:40px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;      
+}
+
+.cursor{
+   margin:0 auto;
+    width:0px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;      
+
+}
+
+.meter { 
+    height: 5px;
+    width:300px;
+    margin: 20px auto;
+    position: relative;
+    background: #f3efe6;
+    overflow: hidden;
+
+}
+
+.meter span {
+    display: block;
+    height: 100%;
+}
+
+.progress {
+    background-color: #e4c465;
+    height: 100%;
+    width: 100%;
+}
+
+.animate {
+    animation: progressBar 1500ms ease-in-out;
+    animation-fill-mode: both; 
+}
+
+@keyframes progressBar {
+  0% { width: 100%; }
+  100% { width: 0%; }
+}
+
+</style>
+<body onload="RandomCursor(); failure()">
+
+<h1 id="instructions">To verify your identity, please move the icon over the crosshair</h1>
+
+<div class="meter">
+    <span style="width:100%;">
+        <span class="progress" id="bar"></span>
+    </span>
+</div>
+
+<div id="crosshair" style="position:relative">
+    <div class="crosshair">
+        <p id="outline" class="outline" style="position:absolute; margin-top:0px; margin-left:0px"></p>
+        <p id="horiztonal" class="horizontal" style="position:absolute; margin-top:200px; margin-left:0px;">
+        <p id="vertical" class="vertical" style="position:absolute; margin-top:0px; margin-left:200px;"></p>
+    </div>
+    
+</div>
+
+<br>
+
+<div id="movement" style="position:relative">
+    <div class="movement">
+        <button id="up" class="key" style="position:absolute; margin-top:400px; margin-left:0px">▲</button>
+        <button id="down" class="key" style="position:absolute; margin-top:450px; margin-left:0px;">▼</button>
+        <button id="left" class="key" style="position:absolute; margin-top:450px; margin-left:-50px;">◀</button>
+        <button id="right" class="key" style="position:absolute; margin-top:450px; margin-left:50px;">▶</button>
+        <p id="cursor" class="cursor" style="position:absolute" style>⦻</p>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<p id="Fail" style="text-align: center; display:none; color:red;"> Please Try Again</p>
+
+</body>
+<script>
+
+var randomh = Math.floor(Math.random() * 384)-20;
+var randomw = Math.floor(Math.random() * 384)-178;
+var attempt = 0    
+function RandomCursor(){
+    var randomh = Math.floor(Math.random() * 384)-20;
+    var randomw = Math.floor(Math.random() * 384)-178;
+    document.getElementById("cursor").style.marginTop =randomh +'px';
+    document.getElementById("cursor").style.marginLeft =randomw +'px';
+}
+
+up.onclick=function(){
+    randomh--
+    document.getElementById("cursor").style.marginTop =randomh +'px';
+}
+down.onclick=function(){
+    randomh++
+    document.getElementById("cursor").style.marginTop =randomh +'px';
+}
+left.onclick=function(){
+    randomw--
+    document.getElementById("cursor").style.marginLeft =randomw +'px';
+}
+up.onclick=function(){
+    randomw++
+    document.getElementById("cursor").style.marginLeft =randomw +'px';
+}
+
+function failure(){
+    document.getElementById("bar").classList.add("animate");
+    setTimeout(function(){
+        document.getElementById("Fail").style.display="block";
+        document.getElementById("bar").classList.remove("animate");
+        RandomCursor();
+        attempt++
+        setTimeout(function(){
+            failure()   
+        },100)
+        if (attempt == 3){
+            window.location.href="../Image/image.html"
+        }
+    }, 1500);    
+}
+</script>    
+</html>
