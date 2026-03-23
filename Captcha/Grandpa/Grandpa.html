@@ -1,0 +1,127 @@
+<html>
+<style>
+h1 {
+    justify-content: center;
+    text-align: center;
+}
+
+#phonebutton {
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    gap: 10px;
+    justify-content: center; /* centers the grid horizontally */
+    margin-top: 50px;
+}
+
+#phonebutton button {
+    height: 50px;
+    font-size: 30px;
+}
+
+
+</style>
+<body>
+<h1>
+Grandpa Eugene has fallen and he needs help. Please prove you are a human by aranging proper medical attention     
+</h1>
+
+<div id="phone" style="position:relative">
+   <div id="phonebutton">
+    <button>1</button><button>2</button><button>3</button>
+    <button>4</button><button>5</button><button>6</button>
+    <button>7</button><button>8</button><button>9</button>
+    <button>*</button><button>0</button><button id="dial">#</button>
+    </div>
+</div>
+
+<h1><span id="test"></span></h1>
+<p id="Fail" style="text-align: center; display:none; color:red;"> Please Try Again</p>
+
+<br>
+<div id="call" style="text-align: center;display:none;">
+    <p id="operator">'Hello what is your emergency'</p>
+    <input id="response" type ="text"> <button id="send">Send</button>
+</div>
+
+<p id="Death" style="text-align: center; display:none; color:rgb(0, 0, 0);"> Grandpa Eugene has died due to your failure. <br>Say you're sorry.</p>
+
+</body>
+<script>
+ let input=""
+
+ let step=0
+
+document.querySelectorAll("#phonebutton button").forEach(btn => {
+    btn.onclick = function() {
+        new Audio('./Phone/Button.mp3').play()
+        input += this.textContent;
+        document.getElementById("test").textContent = input;
+    };
+});
+
+dial.onclick=function(){
+    new Audio('./Phone/Dial.mp3').play()
+    setTimeout( function(){
+        if ((input == "911")){
+            new Audio('./Phone/Talking.mp3').play()
+            document.getElementById("call").style.display="block"
+            document.getElementById("Fail").style.display="none"
+        }
+        else{
+            document.getElementById("Fail").style.display="block"
+            input="";
+        }
+    }, 5000);
+}
+
+send.onclick=function(){
+ let msg = document.getElementById("response").value;
+ document.getElementById("response").value="";
+ if (msg==""){
+    new Audio('./Phone/Talking.mp3').play()
+    document.getElementById("operator").textContent="'Did you say something?'"
+ }
+else if(step==0){
+    new Audio('./Phone/Talking.mp3').play()
+    step++
+    document.getElementById("operator").textContent="'Ok, and what am I supposed to do about that?'"
+}
+else if (step==1){
+    new Audio('./Phone/Talking.mp3').play()
+    step++
+    document.getElementById("operator").textContent="'Ma'am, this is a Wendy's.'"
+}
+else if (step==2){
+    new Audio('./Phone/Talking.mp3').play()
+    step++
+    document.getElementById("operator").textContent="'Are you a robot?'"
+}
+else if (step==3){
+    new Audio('./Phone/Talking.mp3').play()
+    step++
+    document.getElementById("operator").textContent="'You sure act like a robot.'"
+}
+else if (step==4){
+    new Audio('./Phone/Talking.mp3').play()
+    step++
+    document.getElementById("operator").textContent="'I think I'm going to hang up now robot.'"
+}
+else if (step==5){
+    new Audio('./Phone/Hangup.mp3').play()
+    document.getElementById("operator").style.display="none"
+    setTimeout(function(){
+        step++
+        document.getElementById("Death").style.display="block"
+    },4500)
+}
+else if (step==6){
+    if (msg== "I'm sorry"||"Im sorry"||"I'm sorry."||"Im sorry."){
+    window.location.href="../Alignment/alignment.html"
+    }
+    else {
+     document.getElementById("Death").textContent="Say you're sorry"   
+    }
+}
+}
+</script>
+</html>
