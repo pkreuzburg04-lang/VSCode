@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maze Solver</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        canvas {
+            border: 2px solid black;
+            margin-top: 20px;
+            /* optional: make it responsive */
+            width:2000px;
+            height: auto;
+        }
+    </style>
+</head>
+<body onload="init()">
+
+    <div style="display:none;">
+        <img id="maze" src="Maze.jpg">
+    </div>
+
+    <h3>Please solve this maze to continue.</h3>
+    <button onclick="erase()">Reset</button>
+    <button id="submit">Submit</button>
+    <br>
+    <canvas id="can"></canvas>
+
+<script>
+const image = document.getElementById("maze");
+let canvas, ctx;
+let flag = false;
+let prevX = 0, prevY = 0, currX = 0, currY = 0;
+let dot_flag = false;
+
+let penColor = "red";
+let penWidth = 4;
+
+function init() {
+    canvas = document.getElementById('can');
+    ctx = canvas.getContext("2d");
+
+    // Set canvas size to image natural size for full quality
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+
+    // Draw maze immediately if loaded
+    if(image.complete){
+        drawMaze();
+    } else {
+        image.onload = drawMaze;
+    }
+
+    // Mouse events
+    canvas.addEventListener("mousemove", function(e){ findxy('move', e); }, false);
+    canvas.addEventListener("mousedown", function(e){ findxy('down', e); }, false);
+    canvas.addEventListener("mouseup", function(e){ findxy('up', e); }, false);
+    canvas.addEventListener("mouseout", function(e){ findxy('out', e); }, false);
+}
+
+function drawMaze(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+}
+
+function erase(){
+    drawMaze();
+}
+
+// Draw the line
+function draw() {
+    ctx.beginPath();
+    ctx.moveTo(prevX, prevY);
+    ctx.lineTo(currX, currY);
+    ctx.strokeStyle = penColor;
+    ctx.lineWidth = penWidth;
+    ctx.stroke();
+    ctx.closePath();
+}
+
+// Handle mouse coordinates correctly
+function findxy(res, e){
+    const rect = canvas.getBoundingClientRect(); // canvas on-screen size
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    const mouseX = (e.clientX - rect.left) * scaleX;
+    const mouseY = (e.clientY - rect.top) * scaleY;
+
+    if(res == 'down'){
+        prevX = currX;
+        prevY = currY;
+        currX = mouseX;
+        currY = mouseY;
+        flag = true;
+        dot_flag = true;
+
+        if(dot_flag){
+            ctx.beginPath();
+            ctx.fillStyle = penColor;
+            ctx.fillRect(currX, currY, penWidth, penWidth);
+            ctx.closePath();
+            dot_flag = false;
+        }
+    }
+
+    if(res == 'up' || res == 'out'){ flag = false; }
+
+    if(res == 'move'){
+        if(flag){
+            prevX = currX;
+            prevY = currY;
+            currX = mouseX;
+            currY = mouseY;
+            draw();
+        }
+    }
+}
+</script>
+
+</body>
+</html>

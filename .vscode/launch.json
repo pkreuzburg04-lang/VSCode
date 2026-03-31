@@ -7,13 +7,14 @@
 
 
 
+
         
 
         {
             "type": "waterfox",
             "request": "launch",
-            "name": "index.html",
-            "file": "C:\\Users\\pkreu\\Documents\\VSCode\\VSCode\\Captcha\\index.html"
+            "name": "Maze.html",
+            "file": "C:\\Users\\pkreu\\Documents\\VSCode\\VSCode\\Captcha\\Maze\\Maze.html"
         }
     ]
 }
