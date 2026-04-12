@@ -71,11 +71,12 @@ const refreshImage = (image) => {
         image.style.pointerEvents = "auto"; //make it clickable again
     },1000)
 }
-
+let attempt=0
 // show try again when verify is click
 document.getElementById("verify").addEventListener("click",()=> {
     document.getElementById("solve-image-error-msg").style.display = "block"
-    if (Math.floor(Math.random() * 10) < 3){
+attempt++
+    if (attempt==3){
         window.location.href="../Piano/Piano.html"
     }
 })

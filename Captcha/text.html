@@ -101,12 +101,9 @@
         document.getElementById("wrong").innerHTML = "Please complete the challenge";
       } else {
         document.getElementById("wrong").innerHTML = "Please try again";
-
-        if (Math.floor(Math.random() * 10) < 5) {
           length++;
-        }
 
-        if (Math.floor(Math.random() * 100) < 50) {
+        if (length==10) {
          window.location.href="Image/image.html"
 
         } else {
