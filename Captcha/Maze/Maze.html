@@ -27,6 +27,9 @@
     <button onclick="erase()">Reset</button>
     <button id="submit">Submit</button>
     <br>
+    <div id ="fail" style="display:none; color:red">
+        Please Try Again
+    </div>
     <canvas id="can"></canvas>
 
 <script>
@@ -35,9 +38,18 @@ let canvas, ctx;
 let flag = false;
 let prevX = 0, prevY = 0, currX = 0, currY = 0;
 let dot_flag = false;
-
+let attempt = 0
 let penColor = "red";
 let penWidth = 4;
+
+submit.onclick=function(){
+drawMaze()
+document.getElementById("fail").style.display="block"
+attempt++
+if (attempt==3){
+window.location.href="../text.html"
+}
+}
 
 function init() {
     canvas = document.getElementById('can');
