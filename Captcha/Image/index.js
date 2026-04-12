@@ -42,7 +42,7 @@ document.getElementById("submit").addEventListener("click",()=>{
 })
 
 // fill up the solve-image-container
-const imageCount = 23
+const imageCount = 36
 const solveImageContainer = document.getElementById("solve-image-main-container")
 for (let i=0; i<3; i++) {
     for (let j=0; j<3; j++) {
@@ -50,7 +50,7 @@ for (let i=0; i<3; i++) {
         imageContainer.classList.add("solve-image-container")
 
         const image = document.createElement("img")
-        image.setAttribute("src",`./images/img${((i*3)+j)+1}.jpg`)
+        image.setAttribute("src", `./images/img${Math.floor(Math.random() * imageCount) + 1}.jpg`);
         image.classList.add("solve-image")
         image.addEventListener("click",()=>{
             refreshImage(image)
