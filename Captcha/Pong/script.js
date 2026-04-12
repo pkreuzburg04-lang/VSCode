@@ -129,7 +129,7 @@ function update() {
         aicount++;
         aidisp.innerHTML = aicount;
         if (aicount>9){
-            window.location.href="../Maze/maze.html"
+            window.location.href="../Maze/index.html"
         }
     }
     if (ball.x > WIDTH){
